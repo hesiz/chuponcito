@@ -1,17 +1,33 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 from PIL import Image, ImageDraw, ImageFont
 import io
 import textwrap
+import random
 
 intents = discord.Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+activities = [
+    discord.Activity(type=discord.ActivityType.playing, name="hesiz"),
+    discord.Activity(type=discord.ActivityType.playing, name="@chuponcito"),
+    discord.Activity(type=discord.ActivityType.watching, name="hesiz"),
+    discord.Activity(type=discord.ActivityType.watching, name="@chuponcito"),
+    discord.Activity(type=discord.ActivityType.listening, name="hesiz"),
+    discord.Activity(type=discord.ActivityType.listening, name="@chuponcito")
+]
+
+@tasks.loop(seconds=5)
+async def change_status():
+    activity = random.choice(activities)
+    await bot.change_presence(activity=activity, status=discord.Status.online)
+
 @bot.event
 async def on_ready():
     print(f'{bot.user} has connected to Discord!')
+    change_status.start()
 
 @bot.event
 async def on_message(message):
