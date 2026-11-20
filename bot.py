@@ -122,4 +122,4 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
-bot.run('MTQ2ODEzNDM1NjYxNzkyMDUzNA.GAMWPr.ZnQSO1DhwX1SxKRjsHWz3N8-YPSCRHHcrR_bEE')
+bot.run('MTQ2ODEzNDM1NjYxNzkyMDUzNA.GAMWPr.ZnQSO1DhwX1SxKRjsHWz3N8-YPSCRHHcrR_bEE') # this don't work anymore
